@@ -51,7 +51,7 @@ class Pet
 		void save();
 		virtual void saveExtra() = 0;
 		virtual void interact(int) = 0;
-		~Pet();
+		virtual ~Pet(); // Make destructor VIRTUAL for abstract classes
 };
 
 #endif
