@@ -19,7 +19,7 @@ Cat.o: Cat.cpp
 	$(COMP) $(STD) -c Cat.cpp
 
 test:
-	./program # < your_input.txt
+	./prog # < your_input.txt
 	
 clean:
-	rm *.o program
+	rm *.o prog
