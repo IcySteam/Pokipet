@@ -4,7 +4,7 @@ STD = -std=c++11
 COMP = g++
 
 all: main.cpp Game.o Pet.o Dog.o Cat.o
-	$(COMP) $(STD) -o program Game.o Pet.o Dog.o Cat.o main.cpp
+	$(COMP) $(STD) -o prog Game.o Pet.o Dog.o Cat.o main.cpp
 
 Game.o: Game.cpp
 	$(COMP) $(STD) -c Game.cpp
