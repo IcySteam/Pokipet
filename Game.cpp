@@ -45,16 +45,18 @@ Game::Game()
 		if (valIntInput(roundChoiceChars, 1024) == 1 && roundChoice >= 0 && roundChoice <= 3) {break;}
 		invokeInvalidInput();
 	}
-	cout << "Name your pet!\n";
 	string nameChoice;
-	cin >> nameChoice;
 	switch (roundChoice) {
 		case 0:
 			break;
 		case 1:
+			cout << "Name your dog!\n";
+			cin >> nameChoice;
 			currentPetPtr = new Dog(nameChoice, 0);
 			break;
 		case 2:
+			cout << "Name your cat!\n";
+			cin >> nameChoice;
 			currentPetPtr = new Cat(nameChoice, 0);
 			break;
 		case 3:
@@ -72,8 +74,8 @@ void Game::play()
 		cin >> roundChoiceChars;
 		roundChoice = atoi(roundChoiceChars);
 		if (valIntInput(roundChoiceChars, 1024) == 1 && roundChoice >= 0 && roundChoice < currentPetPtr->getInteractionRange()) {
-			roundCount++;
 			currentPetPtr->interact(roundChoice);
+			roundCount++;
 			break;
 		}
 		invokeInvalidInput();

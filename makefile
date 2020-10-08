@@ -1,19 +1,25 @@
 # TEST MAKEFILE
 
-make-a: main.cpp Game.o Pet.o Dog.o Cat.o
-	g++ -std=c++11 -o a Game.o Pet.o Dog.o Cat.o main.cpp
+STD = -std=c++11
+COMP = g++
 
-make-Game.o: Game.cpp
-	g++ -c Game.cpp
+all: main.cpp Game.o Pet.o Dog.o Cat.o
+	$(COMP) $(STD) -o program Game.o Pet.o Dog.o Cat.o main.cpp
 
-make-Pet.o: Pet.cpp
-	g++ -c Pet.cpp
+Game.o: Game.cpp
+	$(COMP) $(STD) -c Game.cpp
 
-make-Dog.o: Dog.cpp
-	g++ -c Dog.cpp
+Pet.o: Pet.cpp
+	$(COMP) $(STD) -c Pet.cpp
+
+Dog.o: Dog.cpp
+	$(COMP) $(STD) -c Dog.cpp
 	
-make-Cat.o: Cat.cpp
-	g++ -c Cat.cpp
+Cat.o: Cat.cpp
+	$(COMP) $(STD) -c Cat.cpp
 
 test:
-	./a.out # < your_input.txt
+	./program # < your_input.txt
+	
+clean:
+	rm *.o program
