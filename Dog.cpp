@@ -92,9 +92,19 @@ void Dog::saveExtra()
 	
 }
 
+int Dog::getInteractionRange()
+{
+	return 3;
+}
+
 void Dog::interact(int inInt)
 {
 	this->printDetailsExtra();
+}
+
+void Dog::greet()
+{
+	cout << "WOOF~~~ Greetings to you, what would you like to do?\n";
 }
 
 Dog::~Dog()

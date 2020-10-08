@@ -26,7 +26,9 @@ class Dog : public Pet
 		virtual void setNullExtra();
 		virtual void printDetailsExtra();
 		virtual void saveExtra();
+		virtual int getInteractionRange();
 		virtual void interact(int);
+		virtual void greet();
 		~Dog();
 };
 

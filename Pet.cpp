@@ -136,7 +136,7 @@ void Pet::setNull()
 
 void Pet::printDetails()
 {
-	cout << name << " the " << age << "-year old " << type << " with ID " << ID << "\n";
+	cout << name << " the " << age << "-year old " << type << " with type ID " << ID << "\n";
 	cout << "Food: " << food << ", Toy: " << toy << "\n";
 	this->speak();
 }

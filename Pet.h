@@ -50,8 +50,10 @@ class Pet
 		virtual void printDetailsExtra() = 0;
 		void save();
 		virtual void saveExtra() = 0;
+		virtual int getInteractionRange() = 0;
 		virtual void interact(int) = 0;
-		virtual ~Pet(); // Make destructor VIRTUAL for abstract classes
+		virtual void greet() = 0;
+		virtual ~Pet(); // Make destrutor VIRTUAL for abstract classes
 };
 
 #endif

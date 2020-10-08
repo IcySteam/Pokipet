@@ -14,15 +14,37 @@
 #include "Cat.h"
 using namespace std;
 
+char nullChars[1024] = {'\0'}; // max input length
+
+void invokeInvalidInput()
+{
+	cout << "Invalid input! Please try again: ";
+}
+
+int valIntInput(char * inChars, int length)
+{
+	for (int i = 0; i < length; i++){
+		if ((inChars[i] >= 33 && inChars[i] <= 47) || (inChars[i] >= 58 && inChars[i] <= 126)) {return 0;}
+	}
+	return 1;
+}
+
 Game::Game()
 {
 	cout << "Welcome to Pokipet!\nPlease enter your choice: \n";
-	cout << "0. Load existing pet\n";
+	cout << "0. Load existing pet\n"; // load exitsing pet from save file
 	cout << "1. Create a dog!\n";
 	cout << "2. Create a cat!\n";
 	cout << "3. Surprise me!\n";
-	int roundChoice;
-	cin >> roundChoice;
+	char * roundChoiceChars = nullChars; 
+	int roundChoice = -1;
+	while (1) {
+		roundChoiceChars = nullChars;
+		cin >> roundChoiceChars;
+		roundChoice = atoi(roundChoiceChars);
+		if (valIntInput(roundChoiceChars, 1024) == 1 && roundChoice >= 0 && roundChoice <= 3) {break;}
+		invokeInvalidInput();
+	}
 	cout << "Name your pet!\n";
 	string nameChoice;
 	cin >> nameChoice;
@@ -40,9 +62,23 @@ Game::Game()
 	}
 }
 
-void Game::play(int inInt)
+void Game::play()
 {
-	currentPetPtr->interact(inInt);
+	if (roundCount == 0) {currentPetPtr->greet();}
+	char * roundChoiceChars = nullChars; 
+	int roundChoice = -1;
+	while (1) {
+		roundChoiceChars = nullChars;
+		cin >> roundChoiceChars;
+		roundChoice = atoi(roundChoiceChars);
+		if (valIntInput(roundChoiceChars, 1024) == 1 && roundChoice >= 0 && roundChoice < currentPetPtr->getInteractionRange()) {
+			roundCount++;
+			currentPetPtr->interact(roundChoice);
+			break;
+		}
+		invokeInvalidInput();
+	}
+
 }
 
 Game::~Game()

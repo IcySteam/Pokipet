@@ -17,10 +17,8 @@ using namespace std;
 int main()
 {
 	Game myGame;
-	int myInput;
 	while (1) {
-		cin >> myInput;
-		myGame.play(myInput);
+		myGame.play();
 	}
 	return 0;
 }

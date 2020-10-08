@@ -100,9 +100,19 @@ void Cat::saveExtra()
 	
 }
 
+int Cat::getInteractionRange()
+{
+	return 3;
+}
+
 void Cat::interact(int inInt)
 {
 	this->printDetailsExtra();
+}
+
+void Cat::greet()
+{
+	cout << "MEOW~~~ Greetings to you, what would you like to do?\n";
 }
 
 Cat::~Cat()

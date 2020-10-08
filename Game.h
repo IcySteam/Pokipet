@@ -19,11 +19,11 @@ using namespace std;
 class Game
 {
 	private:
-		int roundCount;
+		int roundCount = 0;
 		Pet * currentPetPtr;
 	public:
 		Game();
-		void play(int);
+		void play();
 		~Game();
 };
 
