@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <cstring>
 #include <sstream>
 #include <cstdlib>
 #include <cmath>
@@ -21,6 +22,8 @@ extern bool stringPresent(string pString, string * pStringArray, int size);
 extern void invokeInvalidInput();
 
 extern int valIntInput(char * inChars, int length);
+
+extern void nullCharArray(char *, int);
 // common functions
 
 class Pet
@@ -71,7 +74,6 @@ class Pet
 		string * getRandomFoods(int, string);
 		virtual void interact(int) = 0;
 		virtual void greet() = 0;
-		char nullChars[1024] = {'\0'};
 		virtual ~Pet(); // Make destructor VIRTUAL for abstract classes
 };
 

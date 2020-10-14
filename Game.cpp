@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <cstring>
 #include <sstream>
 #include <cstdlib>
 #include <cmath>
@@ -18,10 +19,10 @@ Game::Game()
 	cout << "1. Create a dog!\n";
 	cout << "2. Create a cat!\n";
 	cout << "3. Surprise me!\n";
-	char * roundChoiceChars = nullChars; 
+	char roundChoiceChars[1024] = {'\0'}; 
 	int roundChoice = -1;
 	while (1) {
-		roundChoiceChars = nullChars;
+		nullCharArray(roundChoiceChars, 1024);
 		cin >> roundChoiceChars;
 		roundChoice = atoi(roundChoiceChars);
 		if (valIntInput(roundChoiceChars, 1024) == 1 && roundChoice >= 0 && roundChoice < 4) {break;}
@@ -50,10 +51,10 @@ void Game::play()
 {
 	if (roundCount == 0) {currentPetPtr->greet();}
 	currentPetPtr->printInteractionOptions();
-	char * roundChoiceChars = nullChars; 
+	char roundChoiceChars[1024] = {'\0'}; 
 	int roundChoice = -1;
 	while (1) {
-		roundChoiceChars = nullChars;
+		nullCharArray(roundChoiceChars, 1024);
 		cin >> roundChoiceChars;
 		roundChoice = atoi(roundChoiceChars);
 		if (valIntInput(roundChoiceChars, 1024) == 1 && roundChoice >= 0 && roundChoice < currentPetPtr->getInteractionRange()) {

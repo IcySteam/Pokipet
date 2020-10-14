@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <cstring>
 #include <sstream>
 #include <cstdlib>
 #include <cmath>
@@ -117,10 +118,10 @@ void Dog::interact(int pInt)
 				for (int i = 0; i < 4; i++) {
 					cout << i << ". " << availableFoods[i] << "\n";
 				}
-				char * tempChoiceChars = nullChars; 
+				char tempChoiceChars[1024] = {'\0'}; 
 				int tempChoice = -1;
 				while (1) {
-					tempChoiceChars = nullChars;
+					nullCharArray(tempChoiceChars, 1024);
 					cin >> tempChoiceChars;
 					tempChoice = atoi(tempChoiceChars);
 					if (valIntInput(tempChoiceChars, 1024) == 1 && tempChoice >= 0 && tempChoice < 4) {break;}

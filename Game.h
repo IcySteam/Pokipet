@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <cstring>
 #include <sstream>
 #include <cstdlib>
 #include <cmath>
@@ -24,7 +25,6 @@ class Game
 	public:
 		Game();
 		void play();
-		char nullChars[1024] = {'\0'};
 		~Game();
 };
 

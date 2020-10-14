@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <cstring>
 #include <sstream>
 #include <cstdlib>
 #include <cmath>
@@ -39,6 +40,13 @@ int valIntInput(char * inChars, int length)
 		if ((inChars[i] >= 33 && inChars[i] <= 47) || (inChars[i] >= 58 && inChars[i] <= 126)) {return 0;}
 	}
 	return 1;
+}
+
+void nullCharArray(char * pCharArray, int length)
+{
+	for (int i = 0; i < length; i++) {
+		pCharArray[i] = '\0';
+	}
 }
 // common functions
 
@@ -172,7 +180,7 @@ int Pet::getInteractionRange()
 
 void Pet::printInteractionOptions()
 {
-	cout << "What would you like to do?\n";
+	cout << "\nWhat would you like to do?\n";
 	cout << "0. Save this pet\n"; // save exitsing pet to save file
 	cout << "1. Feed\n";
 	cout << "2. Pet\n";
