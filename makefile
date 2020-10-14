@@ -1,6 +1,4 @@
-# TEST MAKEFILE
-
-STD = -std=c++11
+STD = -std=c++17
 COMP = g++
 
 all: main.cpp Game.o Pet.o Dog.o Cat.o
@@ -19,7 +17,7 @@ Cat.o: Cat.cpp
 	$(COMP) $(STD) -c Cat.cpp
 
 test:
-	./prog # < your_input.txt
+	./prog < input.txt
 	
 clean:
 	rm *.o prog

@@ -42,7 +42,7 @@ Game::Game()
 		roundChoiceChars = nullChars;
 		cin >> roundChoiceChars;
 		roundChoice = atoi(roundChoiceChars);
-		if (valIntInput(roundChoiceChars, 1024) == 1 && roundChoice >= 0 && roundChoice <= 3) {break;}
+		if (valIntInput(roundChoiceChars, 1024) == 1 && roundChoice >= 0 && roundChoice < 4) {break;}
 		invokeInvalidInput();
 	}
 	string nameChoice;
@@ -67,6 +67,7 @@ Game::Game()
 void Game::play()
 {
 	if (roundCount == 0) {currentPetPtr->greet();}
+	currentPetPtr->printInteractionOptions();
 	char * roundChoiceChars = nullChars; 
 	int roundChoice = -1;
 	while (1) {

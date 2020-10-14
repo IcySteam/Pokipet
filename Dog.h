@@ -17,18 +17,19 @@ using namespace std;
 class Dog : public Pet
 {
 	protected:
-		
+		virtual void setNullExtra();
 	public:
 		Dog();
 		Dog(string, int);
-		void wagTail();
+		void art_wagTail();
 		virtual void speak();
-		virtual void setNullExtra();
 		virtual void printDetailsExtra();
 		virtual void saveExtra();
-		virtual int getInteractionRange();
 		virtual void interact(int);
 		virtual void greet();
+		virtual void gameover_hunger();
+		virtual void gameover_upsettedness();
+		virtual void gameover_boredness();
 		~Dog();
 };
 

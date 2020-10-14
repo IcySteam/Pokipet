@@ -24,7 +24,7 @@ Dog::Dog(string pName, int pAge) : Pet(1, pName, "Bone", "Ball", pAge)
 	
 }
 
-void Dog::wagTail()
+void Dog::art_wagTail()
 {
 	// using raw string literal
 	cout << "\n" << R"(                                                            
@@ -84,7 +84,7 @@ void Dog::setNullExtra()
 void Dog::printDetailsExtra()
 {
 	this->printDetails();;
-	this->wagTail();
+	this->art_wagTail();
 }
 
 void Dog::saveExtra()
@@ -92,19 +92,59 @@ void Dog::saveExtra()
 	
 }
 
-int Dog::getInteractionRange()
+void Dog::interact(int pInt)
 {
-	return 3;
-}
-
-void Dog::interact(int inInt)
-{
-	this->printDetailsExtra();
+	switch (pInt) {
+		case 0: {
+			this->save();
+			this->saveExtra();
+			cout << this->getName() << " the " << this->getType() << " has been successully saved.\n";
+		}
+		break;
+		case 1: {
+			string * availableFoods = getRandomFoods(4, "Bone");
+			for (int i = 0; i < 4; i++) {
+				cout << availableFoods[i] << "\n";
+			}
+			delete[] availableFoods;
+		}
+		break;
+		case 2: {
+			
+		}
+		break;
+		case 3: {
+			
+		}
+		break;
+		case 4: {
+			
+		}
+		break;
+		case 5: {
+			
+		}
+		break;
+	}
 }
 
 void Dog::greet()
 {
-	cout << "WOOF~~~ Greetings to you, what would you like to do?\n";
+	cout << "WOOF~~~ Greetings to you my dear owner, please take good care of me!\n";
+}
+
+void Dog::gameover_hunger()
+{
+	
+}
+	
+void Dog::gameover_upsettedness()
+{
+	
+}
+void Dog::gameover_boredness()
+{
+	
 }
 
 Dog::~Dog()

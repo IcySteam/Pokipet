@@ -17,18 +17,19 @@ using namespace std;
 class Cat : public Pet
 {
 	protected:
-		
+		virtual void setNullExtra();
 	public:
 		Cat();
 		Cat(string, int);
-		void purr();
+		void art_purr();
 		virtual void speak();
-		virtual void setNullExtra();
 		virtual void printDetailsExtra();
 		virtual void saveExtra();
-		virtual int getInteractionRange();
 		virtual void interact(int);
 		virtual void greet();
+		virtual void gameover_hunger();
+		virtual void gameover_upsettedness();
+		virtual void gameover_boredness();
 		~Cat();
 };
 

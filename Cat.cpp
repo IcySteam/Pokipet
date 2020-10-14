@@ -24,7 +24,7 @@ Cat::Cat(string pName, int pAge) : Pet(2, pName, "Fish", "Laser", pAge)
 	
 }
 
-void Cat::purr()
+void Cat::art_purr()
 {
 	// using raw string literal
 	cout << "\n" << R"(                                                            
@@ -92,7 +92,7 @@ void Cat::setNullExtra()
 void Cat::printDetailsExtra()
 {
 	this->printDetails();
-	this->purr();
+	this->art_purr();
 }
 
 void Cat::saveExtra()
@@ -100,19 +100,28 @@ void Cat::saveExtra()
 	
 }
 
-int Cat::getInteractionRange()
-{
-	return 3;
-}
-
-void Cat::interact(int inInt)
+void Cat::interact(int pInt)
 {
 	this->printDetailsExtra();
 }
 
 void Cat::greet()
 {
-	cout << "MEOW~~~ Greetings to you, what would you like to do?\n";
+	cout << "MEOW~~~ Greetings to you my dear owner, please take good care of me!\n";
+}
+
+void Cat::gameover_hunger()
+{
+	
+}
+	
+void Cat::gameover_upsettedness()
+{
+	
+}
+void Cat::gameover_boredness()
+{
+	
 }
 
 Cat::~Cat()
