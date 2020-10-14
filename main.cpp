@@ -9,9 +9,6 @@
 #include <limits>
 #include <vector>
 #include "Game.h"
-#include "Pet.h"
-#include "Dog.h"
-#include "Cat.h"
 using namespace std;
 
 int main()

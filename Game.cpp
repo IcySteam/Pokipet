@@ -9,25 +9,7 @@
 #include <limits>
 #include <vector>
 #include "Game.h"
-#include "Pet.h"
-#include "Dog.h"
-#include "Cat.h"
 using namespace std;
-
-char nullChars[1024] = {'\0'}; // max input length
-
-void invokeInvalidInput()
-{
-	cout << "Invalid input! Please try again: ";
-}
-
-int valIntInput(char * inChars, int length)
-{
-	for (int i = 0; i < length; i++){
-		if ((inChars[i] >= 33 && inChars[i] <= 47) || (inChars[i] >= 58 && inChars[i] <= 126)) {return 0;}
-	}
-	return 1;
-}
 
 Game::Game()
 {

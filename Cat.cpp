@@ -8,7 +8,6 @@
 #include <iomanip>
 #include <limits>
 #include <vector>
-#include "Pet.h"
 #include "Cat.h"
 using namespace std;
 
@@ -81,28 +80,38 @@ void Cat::speak()
 	cout << "Meow~\n";
 }
 
-void Cat::setNullExtra()
+void Cat::setNull()
 {
-	this->setNull();
+	type = "?";
+	name = "?";
+	food = "?";
+	toy = "?";
+	ID = -1;
+	age = -1;
+	hunger = -1;
+	boredness = -1;
+	upsettedness = -1;
 	type = "Cat";
 	food = "Fish";
 	toy = "Laser";
 }
 
-void Cat::printDetailsExtra()
+void Cat::printDetails()
 {
-	this->printDetails();
+	cout << name << " the " << age << "-day old " << type << " with type ID " << ID << "\n";
+	cout << "Food: " << food << ", Toy: " << toy << "\n";
+	this->speak();
 	this->art_purr();
 }
 
-void Cat::saveExtra()
+void Cat::save()
 {
 	
 }
 
 void Cat::interact(int pInt)
 {
-	this->printDetailsExtra();
+	
 }
 
 void Cat::greet()

@@ -20,4 +20,4 @@ test:
 	./prog < input.txt
 	
 clean:
-	rm *.o prog
+	rm *.o prog *.stackdump

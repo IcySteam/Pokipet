@@ -13,6 +13,16 @@
 #include <vector>
 using namespace std;
 
+// common functions
+extern bool intPresent(int pInt, int * pIntArray, int size);
+
+extern bool stringPresent(string pString, string * pStringArray, int size);
+
+extern void invokeInvalidInput();
+
+extern int valIntInput(char * inChars, int length);
+// common functions
+
 class Pet
 {
 	protected:
@@ -35,8 +45,7 @@ class Pet
 		void setHunger(int);
 		void setBoredness(int);
 		void setUpsettedness(int);
-		void setNull();
-		virtual void setNullExtra() = 0;
+		virtual void setNull() = 0;
 		int checkGameover();
 		void gameover(int);
 		virtual void gameover_hunger() = 0;
@@ -55,15 +64,14 @@ class Pet
 		int getBoredness();
 		int getUpsettedness();
 		virtual void speak() = 0;
-		void printDetails();
-		virtual void printDetailsExtra() = 0;
-		void save();
-		virtual void saveExtra() = 0;
+		virtual void printDetails() = 0;
+		virtual void save() = 0;
 		int getInteractionRange();
 		void printInteractionOptions();
 		string * getRandomFoods(int, string);
 		virtual void interact(int) = 0;
 		virtual void greet() = 0;
+		char nullChars[1024] = {'\0'};
 		virtual ~Pet(); // Make destructor VIRTUAL for abstract classes
 };
 

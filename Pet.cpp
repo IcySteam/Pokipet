@@ -11,6 +11,7 @@
 #include "Pet.h"
 using namespace std;
 
+// common functions
 bool intPresent(int pInt, int * pIntArray, int size)
 {
 	for (int i = 0; i < size; i++) {
@@ -26,6 +27,20 @@ bool stringPresent(string pString, string * pStringArray, int size)
 	}
 	return false;
 }
+
+void invokeInvalidInput()
+{
+	cout << "Invalid input! Please try again: ";
+}
+
+int valIntInput(char * inChars, int length)
+{
+	for (int i = 0; i < length; i++){
+		if ((inChars[i] >= 33 && inChars[i] <= 47) || (inChars[i] >= 58 && inChars[i] <= 126)) {return 0;}
+	}
+	return 1;
+}
+// common functions
 
 Pet::Pet()
 {
@@ -150,26 +165,6 @@ int Pet::getUpsettedness()
 	return upsettedness;
 }
 
-void Pet::setNull()
-{
-	type = "?";
-	name = "?";
-	food = "?";
-	toy = "?";
-	ID = -1;
-	age = -1;
-	hunger = -1;
-	boredness = -1;
-	upsettedness = -1;
-}
-
-void Pet::printDetails()
-{
-	cout << name << " the " << age << "-year old " << type << " with type ID " << ID << "\n";
-	cout << "Food: " << food << ", Toy: " << toy << "\n";
-	this->speak();
-}
-
 int Pet::getInteractionRange()
 {
 	return 6;
@@ -184,11 +179,6 @@ void Pet::printInteractionOptions()
 	cout << "3. Play\n";
 	cout << "4. Talk\n";
 	cout << "5. Mind your own business\n";
-}
-
-void Pet::save()
-{
-	
 }
 
 string * Pet::getRandomFoods(int size, string pFood)
@@ -209,15 +199,15 @@ string * Pet::getRandomFoods(int size, string pFood)
 
 int Pet::checkGameover()
 {
-	if (this->getHunger() < 1) {
+	if (this->getHunger() >= 15) {
 		this->gameover_hunger();
 		return 1;
 	}
-	else if (this->getUpsettedness() < 1) {
+	else if (this->getUpsettedness() >= 15) {
 		this->gameover_upsettedness();
 		return 2;
 	}
-	else if (this->getBoredness() < 1) {
+	else if (this->getBoredness() >= 15) {
 		this->gameover_boredness();
 		return 3;
 	}
@@ -240,7 +230,6 @@ void Pet::gameover(int pInt)
 	}
 	cout << "\nA recent savefile of your pet has been created.\n";
 	this->save();
-	this->saveExtra();
 	switch (pInt) {
 		case 1:
 			this->gameover_hunger();

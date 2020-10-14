@@ -24,6 +24,7 @@ class Game
 	public:
 		Game();
 		void play();
+		char nullChars[1024] = {'\0'};
 		~Game();
 };
 

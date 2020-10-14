@@ -10,21 +10,21 @@
 #include <ctime>
 #include <iomanip>
 #include <limits>
-#include "Pet.h"
 #include <vector>
+#include "Pet.h"
 using namespace std;
 
 class Dog : public Pet
 {
 	protected:
-		virtual void setNullExtra();
+		virtual void setNull();
 	public:
 		Dog();
 		Dog(string, int);
+		virtual void save();
+		virtual void printDetails();
 		void art_wagTail();
 		virtual void speak();
-		virtual void printDetailsExtra();
-		virtual void saveExtra();
 		virtual void interact(int);
 		virtual void greet();
 		virtual void gameover_hunger();
