@@ -422,7 +422,7 @@ int Dog::interact(int pInt)
 					invokeInvalidInput();
 				}
 				if (availableFoods[tempChoice].compare(food) == 0) {
-					if (hunger > 0) {hunger--;}
+					if (hunger > 1) {hunger = hunger-2;}
 					if (upsettedness > 0) {upsettedness--;}
 					if (boredness > 0) {boredness--;}
 					this->art_chewBone();
@@ -434,28 +434,36 @@ int Dog::interact(int pInt)
 					cout << "Yuck!!!\n";
 				}
 				delete[] availableFoods;
+				if (hunger < 15) {hunger++;}
+				if (boredness < 15) {boredness++;}
+				age++;
 			}
 			break;
 			case 2: {
-				
+				if (hunger < 15) {hunger++;}
+				if (boredness < 15) {boredness++;}
+				age++;
 			}
 			break;
 			case 3: {
-				
+				if (hunger < 15) {hunger++;}
+				if (boredness < 15) {boredness++;}
+				age++;
 			}
 			break;
 			case 4: {
-				
+				if (hunger < 15) {hunger++;}
+				if (boredness < 15) {boredness++;}
+				age++;
 			}
 			break;
 			case 5: {
-				
+				if (hunger < 15) {hunger++;}
+				if (boredness < 15) {boredness++;}
+				age++;
 			}
 			break;
 		}
-		if (hunger < 15) {hunger++;}
-		if (boredness < 15) {boredness++;}
-		age++;
 		return 0;
 	}
 }
