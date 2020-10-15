@@ -38,6 +38,7 @@ class Pet
 		int hunger;
 		int boredness;
 		int upsettedness;
+		void progressAttributes();
 		string * memory;
 		void setType(string);
 		void setName(string);

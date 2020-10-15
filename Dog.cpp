@@ -434,33 +434,23 @@ int Dog::interact(int pInt)
 					cout << "Yuck!!!\n";
 				}
 				delete[] availableFoods;
-				if (hunger < 15) {hunger++;}
-				if (boredness < 15) {boredness++;}
-				age++;
+				this->progressAttributes();
 			}
 			break;
 			case 2: {
-				if (hunger < 15) {hunger++;}
-				if (boredness < 15) {boredness++;}
-				age++;
+				this->progressAttributes();
 			}
 			break;
 			case 3: {
-				if (hunger < 15) {hunger++;}
-				if (boredness < 15) {boredness++;}
-				age++;
+				this->progressAttributes();
 			}
 			break;
 			case 4: {
-				if (hunger < 15) {hunger++;}
-				if (boredness < 15) {boredness++;}
-				age++;
+				this->progressAttributes();
 			}
 			break;
 			case 5: {
-				if (hunger < 15) {hunger++;}
-				if (boredness < 15) {boredness++;}
-				age++;
+				this->progressAttributes();
 			}
 			break;
 		}

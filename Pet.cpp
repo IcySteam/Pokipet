@@ -248,6 +248,13 @@ void Pet::gameover(int pInt)
 	}
 }
 
+void Pet::progressAttributes()
+{
+	if (hunger < 15) {hunger++;}
+	if (boredness < 15) {boredness++;}
+	age++;
+}
+
 Pet::~Pet()
 {
 	
