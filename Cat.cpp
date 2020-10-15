@@ -102,7 +102,6 @@ void Cat::printDetails()
 	cout << name << " the " << age << "-day old " << type << " with type ID " << ID << "\n";
 	cout << "Food: " << food << ", Toy: " << toy << "\n";
 	this->speak();
-	this->art_purr();
 }
 
 void Cat::save()
@@ -110,9 +109,9 @@ void Cat::save()
 	
 }
 
-void Cat::interact(int pInt)
+int Cat::interact(int pInt)
 {
-	
+	return 0;
 }
 
 void Cat::greet()

@@ -72,7 +72,7 @@ class Pet
 		int getInteractionRange();
 		void printInteractionOptions();
 		string * getRandomFoods(int, string);
-		virtual void interact(int) = 0;
+		virtual int interact(int) = 0;
 		virtual void greet() = 0;
 		virtual ~Pet(); // Make destructor VIRTUAL for abstract classes
 };

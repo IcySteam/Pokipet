@@ -25,8 +25,13 @@ class Dog : public Pet
 		virtual void save();
 		virtual void printDetails();
 		void art_wagTail();
+		void art_chewBone();
+		void art_enraged();
+		void art_sit();
+		void art_annoyed();
+		void art_death();
 		virtual void speak();
-		virtual void interact(int);
+		virtual int interact(int);
 		virtual void greet();
 		virtual void gameover_hunger();
 		virtual void gameover_upsettedness();

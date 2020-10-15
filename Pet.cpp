@@ -208,15 +208,12 @@ string * Pet::getRandomFoods(int size, string pFood)
 int Pet::checkGameover()
 {
 	if (this->getHunger() >= 15) {
-		this->gameover_hunger();
 		return 1;
 	}
 	else if (this->getUpsettedness() >= 15) {
-		this->gameover_upsettedness();
 		return 2;
 	}
 	else if (this->getBoredness() >= 15) {
-		this->gameover_boredness();
 		return 3;
 	}
 	return 0;
@@ -236,8 +233,8 @@ void Pet::gameover(int pInt)
 			cout << "bored.";
 			break;
 	}
-	cout << "\nA recent savefile of your pet has been created.\n";
 	this->save();
+	cout << "\nA recent savefile of your pet has been created.\n";
 	switch (pInt) {
 		case 1:
 			this->gameover_hunger();

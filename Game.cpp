@@ -47,24 +47,25 @@ Game::Game()
 	}
 }
 
-void Game::play()
+int Game::play()
 {
 	if (roundCount == 0) {currentPetPtr->greet();}
 	currentPetPtr->printInteractionOptions();
 	char roundChoiceChars[1024] = {'\0'}; 
 	int roundChoice = -1;
+	int output = 0;
 	while (1) {
 		nullCharArray(roundChoiceChars, 1024);
 		cin >> roundChoiceChars;
 		roundChoice = atoi(roundChoiceChars);
 		if (valIntInput(roundChoiceChars, 1024) == 1 && roundChoice >= 0 && roundChoice < currentPetPtr->getInteractionRange()) {
-			currentPetPtr->interact(roundChoice);
+			output = currentPetPtr->interact(roundChoice);
 			roundCount++;
 			break;
 		}
 		invokeInvalidInput();
 	}
-
+	return output;
 }
 
 Game::~Game()

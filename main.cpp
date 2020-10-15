@@ -15,8 +15,9 @@ using namespace std;
 int main()
 {
 	Game myGame;
-	while (1) {
-		myGame.play();
+	int gameReturn = 0; 
+	while (gameReturn == 0) {
+		gameReturn = myGame.play();
 	}
 	return 0;
 }

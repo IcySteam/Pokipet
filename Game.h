@@ -24,7 +24,7 @@ class Game
 		Pet * currentPetPtr;
 	public:
 		Game();
-		void play();
+		int play();
 		~Game();
 };
 

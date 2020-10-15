@@ -26,7 +26,7 @@ class Cat : public Pet
 		virtual void printDetails();
 		void art_purr();
 		virtual void speak();
-		virtual void interact(int);
+		virtual int interact(int);
 		virtual void greet();
 		virtual void gameover_hunger();
 		virtual void gameover_upsettedness();
