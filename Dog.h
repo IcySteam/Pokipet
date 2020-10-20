@@ -30,6 +30,7 @@ class Dog : public Pet
 		void art_sit();
 		void art_annoyed();
 		void art_death();
+		void art_happy();
 		virtual void speak();
 		virtual int interact(int);
 		virtual void greet();

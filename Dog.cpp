@@ -360,9 +360,59 @@ void Dog::art_death()
 	)" << "\n";
 }
 
+void Dog::art_happy()
+{
+	// using raw string literal
+	cout << "\n" << R"(                                                            
+                                                                                                                     (%%%%%#(//***                                                                      
+                                                                                                   &&&&&(********,   &&&&&********                                                                      
+                                                                                                   &&&&&/********,   &&&&&********                                                                      
+                                                                                               .,**&&&&&/*******/.   &&&&&///////,                                                                      
+                                        /////*,********,,,,,**((###////**,,,,,,******/***********//&&&&&(////////#%%%&&&&&///////.                                                                      
+                                        /////////////****///////////////////////(((((((((%%%%%%%%%%&&&&&(////////%%%%&&&&&///////.                                                                      
+                                        /////////////****///////////////////////(((((((((#%%%%%%%%%*/(&&(//*,,,,,,,,,*****,,,,******,,,*//((((///.                                                      
+                           (((////*,,,,,/////////////////***///////*////////////(((((((((#%%%%#%%%%***********/////******/////((((////////((((///                                                       
+                           (((/////(((///////////////////***///////*////////////(((((((((#&&&&%&&&&***********/////******/////((((////////((((///                                                       
+                           *////////((/////////******////****//////****/////////(((((((((#&&&&%&&&&///////****/////******////(((((////////****(((                                                       
+                            ///////////////////*******///****////***********////(((((((((#&&&&%&&&&///////****/////******((((*****////////**,/(((                                                       
+                                     ,///***///*******///****////***********////(((((((((#%%%%%%%%%///////***//////*****/((((*****////////*******                                                       
+                                         ***///*************************////(///(((((((((#%%%%%%%%%*****///////////******((((****########%@@@****                                                       
+                                         ******///**********************////((((((((((((((##%%%%%%%*****//////***************@@@@%#######%@@@****                                                       
+                                         ******////*********************////((((((((((((((#####%%%%*//////////***************@@@@########/****/(/                                                       
+                                         ,**///////********************************/((((((#####%%%%/////*********************@%//*********//(((((((((//*********.                                       
+                                         .//////////////////************************//////&&&&%&&&&/////*****************((((##///////////(****************/&@@@***                                     
+                                          ***/////////////////**/***********/********/////&&&&%&&&&/////*****************#(((##////////////*****************@@@&***                                     
+                                          ***////////////,////**************/////((((((((/&&&&%&&&&/////***********/*****(#(###//////((////*****************@@@#***                                     
+                                          ///////////////  /////////********/////(((((((((%%%%%%%%%/////***********((((((######//////////////////******************                                     
+                                          ///////////////  ******///****/***((((((((((((((%%%%%%%%%****************(((((#######//////////////////******************                                     
+                                          ****///////////  ******///****/**//(((((((((((((%%%%%%%%%**********((((((###((#####//######%(//////////****************&(                                     
+                                          ,******////////  ***///////////    *((((((((((((%%%%%%%%%(*********((((((##########//######@@@@@@&&&&&&&/*******#&&&&&&&.                                     
+                                           ******////////  ***/////////((        //////(((%%%%%%%%%&&(////////(((((##########**#####%@@@@@&&&&&&&&&&&&&&&&&&&&&&&&                                      
+                                           ***///////////  ***///((((((((        //////////////////********///////                      *@&&&&&&&&&&&&&&&&&&&&&                                         
+                                           ***//////(((((, *(/////(((((((        //////////////////********///////                                 ,&&&&&                                               
+                                           ***///((((((((/ ,(((((((((((((        *********/////////***///**///////                                                                                      
+                                           ((((//(((((((((  (((((((((((((        *********/////////***////////////                                                                                      
+                                           (((((((((((((((  ((((((///((((        ,****/***/*///////***///////(((((                                                                                      
+                                           ,(((((((((/((((  ////((///////        .****/////////////***/////(((((((                                                                                      
+                                            ((((((////((((  /////////////        .****//////////((((((/////(((((((                                                                                      
+                                            ////((////////       //              .****////((((((((((((((((((((((((                                                                                      
+                                            //////////////                        /***////((((((((((((((((((((((((                                                                                      
+                                                ,///                              (((((((/(((((((((((((((((///((((                                                                                      
+                                                                                  (((((((((((((((((/(((((((///((//                                                                                      
+                                                                                  (((((((((((/(((((///////////////                                                                                      
+                                                                                  ((((((((////(((((/////////////                                                                                        
+                                                                                  ///(((((/////////       /                                                                                             
+                                                                                  /////////////////                                                                                                     
+                                                                                    ////////////                                                                                                        
+                                                                                          ,                                                                                                                                                                                                                                                                                                                                             
+	)" << "\n";
+}
+
 void Dog::speak()
 {
 	cout << "Woof woof!\n";
+	srand(time(0));
+	cout << "(Translation: " << memory[rand() % (memorySize)] << "?)\n";
 }
 
 void Dog::setNull()
@@ -407,7 +457,7 @@ int Dog::interact(int pInt)
 			}
 			break;
 			case 1: {
-				string * availableFoods = getRandomFoods(4, "Bone");
+				string * availableFoods = getRandomFoods(4, food);
 				cout << "What would you like to feed me with?\n";
 				for (int i = 0; i < 4; i++) {
 					cout << i << ". " << availableFoods[i] << "\n";
@@ -422,34 +472,111 @@ int Dog::interact(int pInt)
 					invokeInvalidInput();
 				}
 				if (availableFoods[tempChoice].compare(food) == 0) {
-					if (hunger > 1) {hunger = hunger-2;}
-					if (upsettedness > 0) {upsettedness--;}
-					if (boredness > 0) {boredness--;}
-					this->art_chewBone();
-					cout << "Yum yum!\n";
+					if (hunger > 2) {
+						hunger = hunger-3;
+						if (upsettedness > 0) {upsettedness--;}
+						if (boredness > 0) {boredness--;}
+						this->art_chewBone();
+						cout << "Yum yum!\n";
+					}
+					else {
+						cout << this->getName() << " the " << this->getType() << " is not hungey and has gracefully rejected your feeding attempt.\n";
+					}
 				}
 				else {
 					if (upsettedness < 15) {upsettedness++;}
 					this->art_annoyed();
-					cout << "Yuck!!!\n";
+					cout << "Yuck!!! Why would you feed me this?!\n";
 				}
 				delete[] availableFoods;
 				this->progressAttributes();
 			}
 			break;
 			case 2: {
+				if (upsettedness >= 12) {
+					cout << "Go away!!! I'm still hating you for what you did!\n";
+					this->art_annoyed();
+				}
+				else if (upsettedness >= 4 && upsettedness < 12){
+					cout << "I'm still a little mas about what you did, but thank you for petting me, I guess - -\n";
+					this->art_happy();
+					upsettedness -= 2;
+					if (boredness > 1) {boredness -= 2;}
+				}
+				else {
+					cout << "Thank you for petting me~~~\n";
+					this->art_happy();
+					if (upsettedness > 1) {boredness -= 2;}
+					if (boredness > 1) {boredness -= 2;}
+				}
 				this->progressAttributes();
 			}
 			break;
 			case 3: {
+				string * availableToys = getRandomToys(4, toy);
+				cout << "How would you like to play with me?\n";
+				for (int i = 0; i < 4; i++) {
+					cout << i << ". " << availableToys[i] << "\n";
+				}
+				char tempChoiceChars[1024] = {'\0'}; 
+				int tempChoice = -1;
+				while (1) {
+					nullCharArray(tempChoiceChars, 1024);
+					cin >> tempChoiceChars;
+					tempChoice = atoi(tempChoiceChars);
+					if (valIntInput(tempChoiceChars, 1024) == 1 && tempChoice >= 0 && tempChoice < 4) {break;}
+					invokeInvalidInput();
+				}
+				if (availableToys[tempChoice].compare(toy) == 0) {
+					if (boredness > 2) {
+						boredness = boredness-3;
+						if (upsettedness > 0) {upsettedness--;}
+						this->art_happy();
+						cout << "Thank you for playing with me~~~\n";
+					}
+					else {
+						cout << this->getName() << " the " << this->getType() << " is too preoccupied with something else and has gracefully ignored your playing attempt.\n";
+					}
+				}
+				else if (availableToys[tempChoice].compare("Throw") == 0) {
+					this->art_enraged();
+					cout << "Why the heck would you throw me??\n";
+					if (upsettedness == 14) {upsettedness++;}
+					else if (upsettedness < 14) {upsettedness += 2;}
+				}
+				else {
+					this->art_annoyed();
+					cout << "Meh\n";
+				}
+				delete[] availableToys;
 				this->progressAttributes();
 			}
 			break;
 			case 4: {
+				if (memorySize+1 == memoryCapacity) {
+					string * temp = new string[memoryCapacity*2];
+					for (int i = 0; i < memorySize; i++) {
+						temp[i] = memory[i];
+					}
+				delete[] memory;
+				memory = temp;
+				memoryCapacity = memoryCapacity*2;
+				}
+				cout << "I'm listening: ";
+				string tempStr;
+				cin >> tempStr;
+				memory[memorySize] = tempStr;
+				cout << "I'll remember that.\n";
+				memorySize++;
 				this->progressAttributes();
 			}
 			break;
 			case 5: {
+				cout << "You are doing your OOP project and ignoring your pet " << this->getType() << ", " << this->getName() << ". \n";
+				if (memorySize > 0) {
+					cout << "Your pet says: ";
+					this->speak();
+					}
 				this->progressAttributes();
 			}
 			break;
@@ -467,7 +594,7 @@ void Dog::greet()
 void Dog::gameover_hunger()
 {
 	this->art_death();
-	cout << "OOOOOOOF... I'm starving to death, you irrsponsible owner!!! But don't worry, an exact replica of myself down to the molecules has been created so you can try again. See you in the next life!\n";
+	cout << "OOOOOOOF... I'm starving to death, you irrsponsible owner!!! But don't worry, an exact replica of myself down to the molecules has been created so you can try again.\n";
 }
 	
 void Dog::gameover_upsettedness()
@@ -481,5 +608,5 @@ void Dog::gameover_boredness()
 
 Dog::~Dog()
 {
-	
+	delete[] memory;
 }

@@ -135,5 +135,5 @@ void Cat::gameover_boredness()
 
 Cat::~Cat()
 {
-	
+	delete[] memory;
 }

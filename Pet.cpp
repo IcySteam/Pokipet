@@ -61,6 +61,7 @@ Pet::Pet()
 	hunger = -1;
 	boredness = -1;
 	upsettedness = -1;
+	memory = new string[memoryCapacity];
 }
 
 Pet::Pet(int pID, string pName, string pFood, string pToy, int pAge)
@@ -81,6 +82,7 @@ Pet::Pet(int pID, string pName, string pFood, string pToy, int pAge)
 	hunger = 0;
 	boredness = 0;
 	upsettedness = 0;
+	memory = new string[memoryCapacity];
 }
 
 void Pet::setType(string pType)
@@ -180,7 +182,9 @@ int Pet::getInteractionRange()
 
 void Pet::printInteractionOptions()
 {
-	cout << "\nWhat would you like to do?\n";
+	cout << "\nIt's day " << this->getAge() << ".\n";
+	this->checkAttributes();
+	cout << "What would you like to do?\n";
 	cout << "0. Save this pet\n"; // save exitsing pet to save file
 	cout << "1. Feed\n";
 	cout << "2. Pet\n";
@@ -200,6 +204,23 @@ string * Pet::getRandomFoods(int size, string pFood)
 		if (output[i].compare(pFood) != 0) {
 			pick = rand() % 10;
 			output[i] = allFoods[pick];
+		}
+	}
+	return output;
+}
+
+
+string * Pet::getRandomToys(int size, string pToy)
+{
+	string allToys[10] = {"Ball", "Laser", "Throw", "Chopsticks", "Team Red Gaming PC", "Google Pixel 5", "Valve Index", "Fidget Spinner", "Mirrorless Camera", "Rubik's Cube"};
+	string * output = new string[size];
+	int pick;
+	srand(time(0));
+	output[rand() % size] = pToy;
+	for (int i = 0; i < size; i++) {
+		if (output[i].compare(pToy) != 0) {
+			pick = rand() % 10;
+			output[i] = allToys[pick];
 		}
 	}
 	return output;
@@ -255,7 +276,26 @@ void Pet::progressAttributes()
 	age++;
 }
 
+void Pet::checkAttributes()
+{
+	string adjective = "";
+	if (hunger >= 4 && hunger < 8) {adjective = "somewhat ";}
+	else if (hunger >= 8 && hunger < 12) {adjective = "";}
+	else if (hunger >= 12) {adjective = "very ";}
+	if (hunger >= 4) {cout << this->getName() << " the " << this->getType() << " is " << adjective << "hungry.\n";}
+	
+	if (upsettedness >= 4 && upsettedness < 8) {adjective = "somewhat ";}
+	else if (upsettedness >= 8 && upsettedness < 12) {adjective = "";}
+	else if (upsettedness >= 12) {adjective = "very ";}
+	if (upsettedness >= 4) {cout << this->getName() << " the " << this->getType() << " is " << adjective << "upset.\n";}
+	
+	if (boredness >= 4 && boredness < 8) {adjective = "somewhat ";}
+	else if (boredness >= 8 && boredness < 12) {adjective = "";}
+	else if (boredness >= 12) {adjective = "very ";}
+	if (boredness >= 4) {cout << this->getName() << " the " << this->getType() << " is " << adjective << "bored.\n";}
+}
+
 Pet::~Pet()
 {
-	
+	delete[] memory;
 }

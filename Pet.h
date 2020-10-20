@@ -40,6 +40,8 @@ class Pet
 		int upsettedness;
 		void progressAttributes();
 		string * memory;
+		int memoryCapacity = 4;
+		int memorySize = 0;
 		void setType(string);
 		void setName(string);
 		void setFood(string);
@@ -50,6 +52,7 @@ class Pet
 		void setBoredness(int);
 		void setUpsettedness(int);
 		virtual void setNull() = 0;
+		void checkAttributes();
 		int checkGameover();
 		void gameover(int);
 		virtual void gameover_hunger() = 0;
@@ -73,6 +76,7 @@ class Pet
 		int getInteractionRange();
 		void printInteractionOptions();
 		string * getRandomFoods(int, string);
+		string * getRandomToys(int, string);
 		virtual int interact(int) = 0;
 		virtual void greet() = 0;
 		virtual ~Pet(); // Make destructor VIRTUAL for abstract classes
