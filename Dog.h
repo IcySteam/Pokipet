@@ -2,6 +2,7 @@
 #define DOG_H
 
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <cstring>
 #include <sstream>
@@ -17,13 +18,7 @@ using namespace std;
 
 class Dog : public Pet
 {
-	protected:
-		virtual void setNull();
-	public:
-		Dog();
-		Dog(string, int);
-		virtual void save();
-		virtual void printDetails();
+	private:
 		void art_wagTail();
 		void art_chewBone();
 		void art_enraged();
@@ -31,13 +26,18 @@ class Dog : public Pet
 		void art_annoyed();
 		void art_death();
 		void art_happy();
+	protected:
 		virtual void speak();
+		virtual void gameover_hunger();
+		virtual void gameover_boredness();
+		virtual void gameover_upsettedness();
+	public:
+		Dog();
+		Dog(string, int);
+		virtual void printDetails();
 		virtual int interact(int);
 		virtual void greet();
-		virtual void gameover_hunger();
-		virtual void gameover_upsettedness();
-		virtual void gameover_boredness();
-		~Dog();
+		virtual ~Dog();
 };
 
 #endif

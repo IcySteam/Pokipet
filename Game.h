@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <cstring>
 #include <sstream>
@@ -22,6 +23,7 @@ class Game
 	private:
 		int roundCount = 0;
 		Pet * currentPetPtr;
+		void art_logo();
 	public:
 		Game();
 		int play();

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <cstring>
 #include <sstream>
@@ -14,14 +15,13 @@ using namespace std;
 
 Dog::Dog() : Pet()
 {
-	type = "Dog";
-	food = "Bone";
-	toy = "Ball";
+	this->setType("Dog");
+	this->setFood("Bone");
+	this->setToy("Ball");
 }
 
 Dog::Dog(string pName, int pAge) : Pet(1, pName, "Bone", "Ball", pAge)
 {
-	
 }
 
 void Dog::art_wagTail()
@@ -415,195 +415,196 @@ void Dog::speak()
 	cout << "(Translation: " << memory[rand() % (memorySize)] << "?)\n";
 }
 
-void Dog::setNull()
-{
-	type = "?";
-	name = "?";
-	food = "?";
-	toy = "?";
-	ID = -1;
-	age = -1;
-	hunger = -1;
-	boredness = -1;
-	upsettedness = -1;
-	type = "Dog";
-	food = "Bone";
-	toy = "Ball";
-}
-
 void Dog::printDetails()
 {
-	cout << name << " the " << age << "-day old " << type << " with type ID " << ID << "\n";
-	cout << "Food: " << food << ", Toy: " << toy << "\n";
-	this->speak();
-}
-
-void Dog::save()
-{
-	
+	this->Pet::printDetails();
 }
 
 int Dog::interact(int pInt)
 {
 	if (this->checkGameover() != 0) {
 		this->gameover(this->checkGameover());
-		return 1;
+		return 1; // return 1 to pass gameover intent
 		}
 	else {
 		switch (pInt) {
 			case 0: {
 				this->save();
-				cout << this->getName() << " the " << this->getType() << " has been successully saved.\n";
 			}
 			break;
 			case 1: {
-				string * availableFoods = getRandomFoods(4, food);
+				int numFoods = 4;
+				string * availableFoods = getRandomFoods(numFoods, this->getFood());
 				cout << "What would you like to feed me with?\n";
-				for (int i = 0; i < 4; i++) {
-					cout << i << ". " << availableFoods[i] << "\n";
+				for (int i = 0; i < numFoods+1; i++) {
+					if (i == 0) {cout << "0. Return to previous menu\n";}
+					else {cout << i << ". " << availableFoods[i-1] << "\n";}
 				}
-				char tempChoiceChars[1024] = {'\0'}; 
+				char tempChoiceChars[1024] = {'\0'}; // input validation. hard to make this a function so this code block reappears later when needed
 				int tempChoice = -1;
 				while (1) {
 					nullCharArray(tempChoiceChars, 1024);
 					cin >> tempChoiceChars;
 					tempChoice = atoi(tempChoiceChars);
-					if (valIntInput(tempChoiceChars, 1024) == 1 && tempChoice >= 0 && tempChoice < 4) {break;}
+					if (valIntInput(tempChoiceChars, 1024) == 1 && tempChoice >= 0 && tempChoice < numFoods+1) {break;}
 					invokeInvalidInput();
-				}
-				if (availableFoods[tempChoice].compare(food) == 0) {
-					if (hunger > 2) {
-						hunger = hunger-3;
+				} // input validation. hard to make this a function so this code block reappears later when needed
+				if (tempChoice == 0) {break;}
+				else if (this->getHunger() > 2) {
+					if (availableFoods[tempChoice-1].compare(this->getFood()) == 0) {
+						srand(time(0));
+						hunger = rand()%3;
 						if (upsettedness > 0) {upsettedness--;}
 						if (boredness > 0) {boredness--;}
 						this->art_chewBone();
 						cout << "Yum yum!\n";
 					}
 					else {
-						cout << this->getName() << " the " << this->getType() << " is not hungey and has gracefully rejected your feeding attempt.\n";
+						if (upsettedness < 15) {upsettedness++;}
+						this->art_annoyed();
+						cout << "Yuck!!! Why would you feed me this?!\n";
 					}
 				}
-				else {
-					if (upsettedness < 15) {upsettedness++;}
-					this->art_annoyed();
-					cout << "Yuck!!! Why would you feed me this?!\n";
-				}
+				else {cout << this->getName() << " the " << this->getType() << " is not hungry and has gracefully rejected your feeding attempt.\n";}
 				delete[] availableFoods;
 				this->progressAttributes();
 			}
 			break;
 			case 2: {
-				if (upsettedness >= 12) {
-					cout << "Go away!!! I'm still hating you for what you did!\n";
+				if (this->getUpsettedness() >= 12) {
 					this->art_annoyed();
+					cout << "Go away!!! I'm still hating you for what you did!\n";
+					srand(time(0));
+					if ((rand() % 10) < 2) { // random events; if we had more time more of these would be implemented to make pet classes more diversified and the game more fun
+						cout << "Your pet " << this->getType() << " bit you on your petting hand a little too hard and you had to go to the ER.\n";
+						this->gameover(3);
+						return 1;
+					}
 				}
-				else if (upsettedness >= 4 && upsettedness < 12){
-					cout << "I'm still a little mas about what you did, but thank you for petting me, I guess - -\n";
+				else if (this->getUpsettedness() >= 4 && this->getUpsettedness() < 12){
 					this->art_happy();
+					cout << "I'm still a little mad about what you did, but thank you for petting me, I guess - -\n";
 					upsettedness -= 2;
-					if (boredness > 1) {boredness -= 2;}
+					if (boredness > 2) {boredness -= 3;}
 				}
 				else {
-					cout << "Thank you for petting me~~~\n";
 					this->art_happy();
-					if (upsettedness > 1) {boredness -= 2;}
-					if (boredness > 1) {boredness -= 2;}
+					cout << "Thank you for petting me~~~\n";
+					if (upsettedness > 1) {upsettedness--;}
+					if (boredness > 2) {boredness -= 3;}
 				}
 				this->progressAttributes();
 			}
 			break;
 			case 3: {
-				string * availableToys = getRandomToys(4, toy);
+				int numToys = 4;
+				string * availableToys = getRandomToys(numToys, this->getToy());
 				cout << "How would you like to play with me?\n";
-				for (int i = 0; i < 4; i++) {
-					cout << i << ". " << availableToys[i] << "\n";
+				for (int i = 0; i < numToys+1; i++) {
+					if (i == 0) {cout << "0. Return to previous menu\n";}
+					else {cout << i << ". " << availableToys[i-1] << "\n";}
 				}
-				char tempChoiceChars[1024] = {'\0'}; 
+				char tempChoiceChars[1024] = {'\0'}; // input validation.
 				int tempChoice = -1;
 				while (1) {
 					nullCharArray(tempChoiceChars, 1024);
 					cin >> tempChoiceChars;
 					tempChoice = atoi(tempChoiceChars);
-					if (valIntInput(tempChoiceChars, 1024) == 1 && tempChoice >= 0 && tempChoice < 4) {break;}
+					if (valIntInput(tempChoiceChars, 1024) == 1 && tempChoice >= 0 && tempChoice < numToys+1) {break;}
 					invokeInvalidInput();
-				}
-				if (availableToys[tempChoice].compare(toy) == 0) {
-					if (boredness > 2) {
-						boredness = boredness-3;
-						if (upsettedness > 0) {upsettedness--;}
-						this->art_happy();
-						cout << "Thank you for playing with me~~~\n";
-					}
-					else {
-						cout << this->getName() << " the " << this->getType() << " is too preoccupied with something else and has gracefully ignored your playing attempt.\n";
-					}
-				}
-				else if (availableToys[tempChoice].compare("Throw") == 0) {
+				} // input validation.
+				if (tempChoice == 0) {break;}
+				else if (availableToys[tempChoice-1].compare("Throw") == 0) {
 					this->art_enraged();
 					cout << "Why the heck would you throw me??\n";
 					if (upsettedness == 14) {upsettedness++;}
 					else if (upsettedness < 14) {upsettedness += 2;}
 				}
+				else if (boredness > 2) {
+					if (availableToys[tempChoice-1].compare(this->getToy()) == 0) {
+						double tempBoredness = (double)boredness;
+						boredness = floor(tempBoredness/2);
+						if (upsettedness > 0) {upsettedness--;}
+						this->art_happy();
+						cout << "Thank you for playing with me~~~\n";
+					}
+					else {
+						this->art_annoyed();
+						cout << "Meh\n";
+					}
+				}
 				else {
-					this->art_annoyed();
-					cout << "Meh\n";
+					cout << this->getName() << " the " << this->getType() << " is too preoccupied with something else and has gracefully ignored your playing attempt.\n";
 				}
 				delete[] availableToys;
 				this->progressAttributes();
 			}
 			break;
 			case 4: {
-				if (memorySize+1 == memoryCapacity) {
-					string * temp = new string[memoryCapacity*2];
-					for (int i = 0; i < memorySize; i++) {
-						temp[i] = memory[i];
-					}
-				delete[] memory;
-				memory = temp;
-				memoryCapacity = memoryCapacity*2;
-				}
-				cout << "I'm listening: ";
-				string tempStr;
-				cin >> tempStr;
-				memory[memorySize] = tempStr;
-				cout << "I'll remember that.\n";
-				memorySize++;
+				this->talkTo();
 				this->progressAttributes();
 			}
 			break;
 			case 5: {
-				cout << "You are doing your OOP project and ignoring your pet " << this->getType() << ", " << this->getName() << ". \n";
-				if (memorySize > 0) {
-					cout << "Your pet says: ";
-					this->speak();
+				srand(time(0));
+				int randomChoice = rand()%2;
+				switch (randomChoice) {
+					case 0: {
+						cout << "You are doing your OOP project and ignoring your pet " << this->getType() << ", " << this->getName() << ". \n";
+						if (hunger >= 12) {cout << "Your pet " << this->getType() << " " << this->getName() << " walks lethargically next to you and looks up at you. It seems it wants something...\n";}
+						else {
+							if (upsettedness < 4 && boredness >= 6 && memorySize > 0) {
+								cout << "Your pet " << this->getType() << " " << this->getName() << " says: ";
+								this->speak();
+							}
+						}
 					}
+					break;
+					case 1: {
+						cout << "You are eating a meal and ignoring your pet " << this->getType() << ", " << this->getName() << ". \n";
+						if (hunger >= 12) {cout << "Your pet " << this->getType() << " " << this->getName() << " walks lethargically next to you and looks up at you. It seems it wants something...\n";}
+						else if (upsettedness < 6) {
+							double hungerRatio = (double)hunger/15.0*100.0;
+							srand(time(0));
+							if (rand()%100 < hungerRatio) {
+								cout << "Your pet " << this->getType() << " " << this->getName() << " sits next to you and looks up at you.\n";
+								this->art_sit();
+							}
+						}
+					}
+					break;
+				}
 				this->progressAttributes();
 			}
 			break;
 		}
-		return 0;
+		return 0; // return 0 to continue playing
 	}
 }
 
 void Dog::greet()
 {
 	this->art_sit();
-	cout << "WOOF~~~ Greetings to you my dear owner, please take good care of me!\n";
+	if (this->getAge() == 0) {cout << "WOOF~~~ Greetings to you my dear owner, please take good care of me!\n";}
+	else {cout << "WOOF~~~ Greetings to you my dear owner, nice to see you again~\n";}
 }
 
 void Dog::gameover_hunger()
 {
 	this->art_death();
-	cout << "OOOOOOOF... I'm starving to death, you irrsponsible owner!!! But don't worry, an exact replica of myself down to the molecules has been created so you can try again.\n";
+	cout << "Weeeeee... I'm starving to death, you irrsponsible owner!!! But don't worry, an exact replica of myself down to the molecules has been created so you can try again.\n";
 }
+	
+void Dog::gameover_boredness()
+{
+	this->art_annoyed();
+	cout << this->getName() << " the " << this->getType() << " is not responding. Rebooting...\n";
+}	
 	
 void Dog::gameover_upsettedness()
 {
-	
-}
-void Dog::gameover_boredness()
-{
-	
+	this->art_enraged();
+	cout << "OOOOOOOF!!! That does it!!! *Proceeds to bark so loudly that you're now deaf.*\n";
 }
 
 Dog::~Dog()

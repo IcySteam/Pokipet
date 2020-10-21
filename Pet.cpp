@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <cstring>
 #include <sstream>
@@ -73,10 +74,10 @@ Pet::Pet(int pID, string pName, string pFood, string pToy, int pAge)
 	switch (ID) {
 		case 1:
 			type = "Dog";
-			break;
+		break;
 		case 2:
 			type = "Cat";
-			break;
+		break;
 	}
 	age = pAge;
 	hunger = 0;
@@ -113,21 +114,6 @@ void Pet::setID(int pID)
 void Pet::setAge(int pAge)
 {
 	age = pAge;
-}
-
-void Pet::setHunger(int pHunger)
-{
-	hunger = pHunger;
-}
-
-void Pet::setBoredness(int pBoredness)
-{
-	boredness = pBoredness;
-}
-
-void Pet::setUpsettedness(int pUpsettedness)
-{
-	upsettedness = pUpsettedness;
 }
 
 string Pet::getType()
@@ -182,10 +168,12 @@ int Pet::getInteractionRange()
 
 void Pet::printInteractionOptions()
 {
-	cout << "\nIt's day " << this->getAge() << ".\n";
+	system("read -p 'Press Enter to continue...' var");
+	system("clear");
+	cout << "It's day " << this->getAge() << ".\n";
 	this->checkAttributes();
 	cout << "What would you like to do?\n";
-	cout << "0. Save this pet\n"; // save exitsing pet to save file
+	cout << "0. Save this pet\n"; // save existing pet to save file
 	cout << "1. Feed\n";
 	cout << "2. Pet\n";
 	cout << "3. Play\n";
@@ -228,13 +216,13 @@ string * Pet::getRandomToys(int size, string pToy)
 
 int Pet::checkGameover()
 {
-	if (this->getHunger() >= 15) {
+	if (hunger >= 15) {
 		return 1;
 	}
-	else if (this->getUpsettedness() >= 15) {
+	else if (boredness >= 15) {
 		return 2;
 	}
-	else if (this->getBoredness() >= 15) {
+	else if (upsettedness >= 15) {
 		return 3;
 	}
 	return 0;
@@ -245,27 +233,26 @@ void Pet::gameover(int pInt)
 	cout << "Game over!!! Your pet " << this->getType() << ", " << this->getName() << ", has become too ";
 	switch (pInt) {
 		case 1:
-			cout << "hungry.";
-			break;
+			cout << "hungry.\n";
+		break;
 		case 2:
-			cout << "upset.";
-			break;
+			cout << "bored.\n";
+		break;
 		case 3:
-			cout << "bored.";
-			break;
+			cout << "upset.\n";
+		break;
 	}
 	this->save();
-	cout << "\nA recent savefile of your pet has been created.\n";
 	switch (pInt) {
 		case 1:
 			this->gameover_hunger();
-			break;
+		break;
 		case 2:
-			this->gameover_upsettedness();
-			break;
-		case 3:
 			this->gameover_boredness();
-			break;
+		break;
+		case 3:
+			this->gameover_upsettedness();
+		break;
 	}
 }
 
@@ -279,22 +266,98 @@ void Pet::progressAttributes()
 void Pet::checkAttributes()
 {
 	string adjective = "";
-	if (hunger >= 4 && hunger < 8) {adjective = "somewhat ";}
-	else if (hunger >= 8 && hunger < 12) {adjective = "";}
+	if (hunger >= 6 && hunger < 9) {adjective = "somewhat ";}
+	else if (hunger >= 9 && hunger < 12) {adjective = "";}
 	else if (hunger >= 12) {adjective = "very ";}
-	if (hunger >= 4) {cout << this->getName() << " the " << this->getType() << " is " << adjective << "hungry.\n";}
+	if (hunger >= 6) {cout << this->getName() << " the " << this->getType() << " is " << adjective << "hungry.\n";}
+	
+	if (boredness >= 6 && boredness < 9) {adjective = "somewhat ";}
+	else if (boredness >= 9 && boredness < 12) {adjective = "";}
+	else if (boredness >= 12) {adjective = "very ";}
+	if (boredness >= 6) {cout << this->getName() << " the " << this->getType() << " is " << adjective << "bored.\n";}
 	
 	if (upsettedness >= 4 && upsettedness < 8) {adjective = "somewhat ";}
 	else if (upsettedness >= 8 && upsettedness < 12) {adjective = "";}
 	else if (upsettedness >= 12) {adjective = "very ";}
 	if (upsettedness >= 4) {cout << this->getName() << " the " << this->getType() << " is " << adjective << "upset.\n";}
-	
-	if (boredness >= 4 && boredness < 8) {adjective = "somewhat ";}
-	else if (boredness >= 8 && boredness < 12) {adjective = "";}
-	else if (boredness >= 12) {adjective = "very ";}
-	if (boredness >= 4) {cout << this->getName() << " the " << this->getType() << " is " << adjective << "bored.\n";}
 }
 
+void Pet::printDetails()
+{
+	cout << this->getName() << " the " << this->getAge() << "-day old " << this->getType() << " with type ID " << this->getID() << "\n";
+	cout << "Food: " << this->getFood() << ", Toy: " << this->getToy() << "\n";
+}
+
+void Pet::save()
+{
+	srand(time(0));
+	string newSaveCommand = "touch ";
+	string fileName = to_string(rand());
+	fileName.append(".savefile");
+	newSaveCommand.append(fileName);
+	char newSaveCommandChars[1024] = {'\0'};
+	strcpy(newSaveCommandChars, newSaveCommand.c_str());
+	system(newSaveCommandChars);
+	ofstream savefile;
+	savefile.open(fileName, ios::app);
+	savefile << this->getID() << "\n";
+	savefile << this->getAge() << "\n";
+	savefile << this->getType() << "\n";
+	savefile << this->getName() << "\n";
+	savefile << this->getFood() << "\n";
+	savefile << this->getToy() << "\n";
+	int pHunger, pBoredness, pUpsettedness;
+	if (hunger > 13) {pHunger = 13;} else {pHunger = hunger;} // revive mechanic
+	if (boredness > 13) {pBoredness = 13;} else {pBoredness = boredness;}
+	if (upsettedness > 13) {pUpsettedness = 13;} else {pUpsettedness = upsettedness;}
+	savefile << pHunger << "\n";
+	savefile << pBoredness << "\n";
+	savefile << pUpsettedness << "\n";
+	savefile << memoryCapacity << "\n";
+	savefile << memorySize << "\n";
+	for (int i = 0; i < memorySize; i++) {
+		savefile << memory[i] << "\n";
+	}
+	cout << this->getName() << " the " << this->getType() << " has been successully saved.\n";
+	cout << "File name: " << fileName << "\n";
+	savefile.close();
+}
+
+void Pet::talkTo()
+{
+	if (memorySize+1 == memoryCapacity) { // realloc
+		string * temp = new string[memoryCapacity*2];
+		for (int i = 0; i < memorySize; i++) {
+			temp[i] = memory[i];
+		}
+	delete[] memory;
+	memory = temp;
+	memoryCapacity = memoryCapacity*2;
+	}
+	cout << "I'm listening: ";
+	string tempStr;
+	cin >> tempStr;
+	memory[memorySize] = tempStr;
+	cout << "I'll remember that.\n";
+	memorySize++;
+}
+
+void Pet::overwrite(int pID, int pAge, string pType, string pName, string pFood, string pToy, int pHunger, int pBoredness, int pUpsettedness, int pMemoryCapacity, int pMemorySize, string * pMemory)
+{
+	ID = pID;
+	age = pAge;
+	type = pType;
+	name = pName;
+	food = pFood;
+	toy = pToy;
+	hunger = pHunger;
+	boredness = pBoredness;
+	upsettedness = pUpsettedness;
+	memoryCapacity = pMemoryCapacity;
+	memorySize = pMemorySize;
+	delete[] memory;
+	memory = pMemory;
+}
 Pet::~Pet()
 {
 	delete[] memory;

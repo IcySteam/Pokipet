@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <cstring>
 #include <sstream>
@@ -14,10 +15,12 @@ using namespace std;
 
 int main()
 {
-	Game myGame;
+	Game * myGame = new Game();
 	int gameReturn = 0; 
-	while (gameReturn == 0) {
-		gameReturn = myGame.play();
+	while (1) { // keep playing until game over
+		gameReturn = myGame->play();
+		if (gameReturn == 1) {break;}
 	}
 	return 0;
+	exit(0);
 }

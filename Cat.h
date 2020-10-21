@@ -2,6 +2,7 @@
 #define CAT_H
 
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <cstring>
 #include <sstream>
@@ -17,21 +18,20 @@ using namespace std;
 
 class Cat : public Pet
 {
+	private:
+		void art_purr();
 	protected:
-		virtual void setNull();
+		virtual void speak();
+		virtual void gameover_hunger();
+		virtual void gameover_boredness();
+		virtual void gameover_upsettedness();
 	public:
 		Cat();
 		Cat(string, int);
-		virtual void save();
 		virtual void printDetails();
-		void art_purr();
-		virtual void speak();
 		virtual int interact(int);
 		virtual void greet();
-		virtual void gameover_hunger();
-		virtual void gameover_upsettedness();
-		virtual void gameover_boredness();
-		~Cat();
+		virtual ~Cat();
 };
 
 #endif
