@@ -285,6 +285,7 @@ void Pet::printDetails()
 {
 	cout << this->getName() << " the " << this->getAge() << "-day old " << this->getType() << " with type ID " << this->getID() << "\n";
 	cout << "Food: " << this->getFood() << ", Toy: " << this->getToy() << "\n";
+	cout << "Hunger: " << hunger << ", Boredness: " << boredness << ", Upsettedness: " << upsettedness << "\n";
 }
 
 void Pet::save()

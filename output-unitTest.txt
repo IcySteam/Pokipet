@@ -1,0 +1,6 @@
+woofy the 0-day old Dog with type ID 1
+Food: Bone, Toy: Ball
+Hunger: 0, Boredness: 0, Upsettedness: 0
+meowza the 0-day old Cat with type ID 2
+Food: Fish, Toy: Laser
+Hunger: 0, Boredness: 0, Upsettedness: 0

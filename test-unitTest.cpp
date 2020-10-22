@@ -15,11 +15,9 @@ using namespace std;
 
 int main()
 {
-	Game * myGame = new Game();
-	int gameReturn = 0; 
-	while (1) { // keep playing until game over
-		gameReturn = myGame->play();
-		if (gameReturn == 1) {break;}
-	}
+	Dog myDog = Dog("woofy", 0);
+	Cat myCat = Cat("meowza", 0);
+	myDog.printDetails();
+	myCat.printDetails();
 	exit(0);
 }
