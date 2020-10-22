@@ -1,0 +1,45 @@
+input:
+2
+1
+aa
+1
+4
+2
+3
+2
+4
+5
+0
+
+output:
+Name your cat!
+
+MEOW~~~ Greetings to you my dear owner, please take good care of me!
+
+What would you like to feed me with?
+0. Return to previous menu
+1. Chili Pepper
+2. Bark
+3. Bone
+4. Fish
+
+aa the Cat is not hungry and has gracefully rejected your feeding attempt.
+
+Thank you for petting me~~~
+
+How would you like to play with me?
+0. Return to previous menu
+1. Mirrorless Camera
+2. Laser
+3. Mirrorless Camera
+4. Ball
+
+aa the Cat is too preoccupied with something else and has gracefully ignored your playing attempt.
+
+I'm listening:
+
+You are doing your OOP project and ignoring your pet Cat, aa.
+
+aa the Cat has been successully saved.
+File name: 679585336.savefile
+

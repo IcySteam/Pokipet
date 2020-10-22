@@ -1,0 +1,28 @@
+just dog functions:
+1 dog test
+create dog function: running well
+save function: running well
+feeding function：running well
+peting function：running well
+play function: running well
+talk function: running well
+do nothing function: running well
+
+After add functions of cat(dog functions&cat functions):
+1dog functions test
+create dog function: running well
+save function: running well
+feeding function：running well
+peting function：running well
+play function: running well
+talk function: running well
+do nothing function: running well
+
+2.cat test
+create cat function: running well
+save function: running well
+feeding function：running well
+peting function：running well
+play function: running well
+talk function: running well
+do nothing function: running well

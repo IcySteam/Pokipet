@@ -1,0 +1,52 @@
+input:
+1
+coco
+1
+3
+0
+4
+5
+0
+
+output:
+
+Name your dog!
+name: coco
+
+WOOF~~~ Greetings to you my dear owner, please take good care of me!
+What would you like to do?
+0. Save this pet
+1. Feed
+2. Pet
+3. Play
+4. Talk
+5. Mind your own business
+
+
+What would you like to feed me with?
+0. Return to previous menu
+1. Stinky Tofu
+2. Fish
+3. Vegemite
+4. Bone
+
+coco the Dog is not hungry and has gracefully rejected your feeding attempt.
+
+How would you like to play with me?
+0. Return to previous menu
+1. Ball
+2. Fidget Spinner
+3. Throw
+4. Fidget Spinner
+
+Press Enter to continue...
+
+I'm listening: coco
+I'll remember that.
+
+You are doing your OOP project and ignoring your pet Dog, coco.
+
+coco the Dog has been successully saved.
+File name: 672358326.savefile
+
+
