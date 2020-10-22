@@ -81,7 +81,7 @@ Game::Game()
 	cout << "0. Load existing pet\n"; // load exitsing pet from save file
 	cout << "1. Adopt a dog!\n";
 	cout << "2. Adopt a cat!\n";
-	cout << "3. Surprise me!\n";
+	cout << "3. Surprise me!\n"; // create random pet
 	int numChoices = 4;
 	char roundChoiceChars[1024] = {'\0'}; // input validation.
 	int roundChoice = -1;
@@ -121,7 +121,7 @@ Game::Game()
 				}
 				else if (iter == 1) {inAge = stoi(line);}
 				else if (iter == 2) {
-					if (!line.empty() && line[line.length()-1] == '\n') {line.erase(line.length()-1);};
+					if (!line.empty() && line[line.length()-1] == '\n') {line.erase(line.length()-1);}; // truncates string if ending ith newline
 					inType = line;
 				}
 				else if (iter == 3) {

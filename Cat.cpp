@@ -80,8 +80,7 @@ void Cat::art_purr()
 void Cat::speak()
 {
 	cout << "Meow~\n";
-	srand(time(0));
-	cout << "(Translation: " << memory[rand() % (memorySize)] << "?)\n";
+	this->Pet::speak();
 }
 
 void Cat::printDetails()

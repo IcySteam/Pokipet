@@ -411,8 +411,7 @@ void Dog::art_happy()
 void Dog::speak()
 {
 	cout << "Woof woof!\n";
-	srand(time(0));
-	cout << "(Translation: " << memory[rand() % (memorySize)] << "?)\n";
+	this->Pet::speak();
 }
 
 void Dog::printDetails()
@@ -432,9 +431,9 @@ int Dog::interact(int pInt)
 				this->save();
 			}
 			break;
-			case 1: {
+			case 1: { // feeding
 				int numFoods = 4;
-				string * availableFoods = getRandomFoods(numFoods, this->getFood());
+				string * availableFoods = getRandomFoods(numFoods, this->getFood()); // get random list of foods including favourite
 				cout << "What would you like to feed me with?\n";
 				for (int i = 0; i < numFoods+1; i++) {
 					if (i == 0) {cout << "0. Return to previous menu\n";}
@@ -470,7 +469,7 @@ int Dog::interact(int pInt)
 				this->progressAttributes();
 			}
 			break;
-			case 2: {
+			case 2: { // petting
 				if (this->getUpsettedness() >= 12) {
 					this->art_annoyed();
 					cout << "Go away!!! I'm still hating you for what you did!\n";
@@ -496,9 +495,9 @@ int Dog::interact(int pInt)
 				this->progressAttributes();
 			}
 			break;
-			case 3: {
+			case 3: { // playing
 				int numToys = 4;
-				string * availableToys = getRandomToys(numToys, this->getToy());
+				string * availableToys = getRandomToys(numToys, this->getToy()); // get random list of toys including favourite
 				cout << "How would you like to play with me?\n";
 				for (int i = 0; i < numToys+1; i++) {
 					if (i == 0) {cout << "0. Return to previous menu\n";}
@@ -540,15 +539,15 @@ int Dog::interact(int pInt)
 				this->progressAttributes();
 			}
 			break;
-			case 4: {
+			case 4: { // talk
 				this->talkTo();
 				this->progressAttributes();
 			}
 			break;
-			case 5: {
+			case 5: { // ignore pet
 				srand(time(0));
 				int randomChoice = rand()%2;
-				switch (randomChoice) {
+				switch (randomChoice) { // random outcomes
 					case 0: {
 						cout << "You are doing your OOP project and ignoring your pet " << this->getType() << ", " << this->getName() << ". \n";
 						if (hunger >= 12) {cout << "Your pet " << this->getType() << " " << this->getName() << " walks lethargically next to you and looks up at you. It seems it wants something...\n";}

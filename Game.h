@@ -23,7 +23,7 @@ class Game
 	private:
 		int roundCount = 0;
 		Pet * currentPetPtr;
-		void art_logo();
+		void art_logo(); // displayed at program startup
 	public:
 		Game();
 		int play();

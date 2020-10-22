@@ -168,7 +168,7 @@ int Pet::getInteractionRange()
 
 void Pet::printInteractionOptions()
 {
-	system("read -p 'Press Enter to continue...' var");
+	system("read -p 'Press Enter to continue...' var"); // asks for confirmation before clearing console
 	system("clear");
 	cout << "It's day " << this->getAge() << ".\n";
 	this->checkAttributes();
@@ -196,7 +196,6 @@ string * Pet::getRandomFoods(int size, string pFood)
 	}
 	return output;
 }
-
 
 string * Pet::getRandomToys(int size, string pToy)
 {
@@ -242,7 +241,7 @@ void Pet::gameover(int pInt)
 			cout << "upset.\n";
 		break;
 	}
-	this->save();
+	this->save(); // save when game over
 	switch (pInt) {
 		case 1:
 			this->gameover_hunger();
@@ -293,14 +292,14 @@ void Pet::save()
 	srand(time(0));
 	string newSaveCommand = "touch ";
 	string fileName = to_string(rand());
-	fileName.append(".savefile");
+	fileName.append(".savefile"); // generate random new savefile name
 	newSaveCommand.append(fileName);
 	char newSaveCommandChars[1024] = {'\0'};
 	strcpy(newSaveCommandChars, newSaveCommand.c_str());
 	system(newSaveCommandChars);
 	ofstream savefile;
-	savefile.open(fileName, ios::app);
-	savefile << this->getID() << "\n";
+	savefile.open(fileName, ios::app); 
+	savefile << this->getID() << "\n"; // saves attributes line by line
 	savefile << this->getAge() << "\n";
 	savefile << this->getType() << "\n";
 	savefile << this->getName() << "\n";
@@ -358,6 +357,13 @@ void Pet::overwrite(int pID, int pAge, string pType, string pName, string pFood,
 	delete[] memory;
 	memory = pMemory;
 }
+
+void Pet::speak()
+{
+	srand(time(0));
+	cout << "(Translation: " << memory[rand() % (memorySize)] << "?)\n";
+}
+
 Pet::~Pet()
 {
 	delete[] memory;

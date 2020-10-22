@@ -43,7 +43,7 @@ class Pet
 		void progressAttributes(); // progression mechanic
 		int memoryCapacity = 4;
 		int memorySize = 0;
-		string * memory;
+		string * memory; // holds what the owner has said
 		void setType(string);
 		void setName(string);
 		void setFood(string);
@@ -55,9 +55,9 @@ class Pet
 		void gameover(int);
 		void save(); // saves pet to savefile
 		void talkTo();
-		virtual void speak() = 0;
-		string * getRandomFoods(int, string); // returns a random list of foods including favourite
-		string * getRandomToys(int, string); // returns a random list of toys including favourite
+		virtual void speak(); // speaks random item in memory
+		string * getRandomFoods(int, string); // returns a random list of foods including passed item
+		string * getRandomToys(int, string); // returns a random list of toys including passed item
 		virtual void gameover_hunger() = 0;
 		virtual void gameover_boredness() = 0;
 		virtual void gameover_upsettedness() = 0;
@@ -74,10 +74,10 @@ class Pet
 		int getBoredness();
 		int getUpsettedness();
 		virtual void printDetails(); // debug only
-		int getInteractionRange();
-		void printInteractionOptions();
+		int getInteractionRange(); // get number of valid interaction options
+		void printInteractionOptions(); // prints options for interaction
 		virtual int interact(int) = 0;
-		virtual void greet() = 0;
+		virtual void greet() = 0; // greet when creating/loading a pet
 		void overwrite(int, int, string, string, string, string, int, int, int, int, int, string *); // overwrites object; used when loading savefile
 		virtual ~Pet(); // Make destructor VIRTUAL for abstract classes
 };

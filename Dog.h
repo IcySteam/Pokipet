@@ -19,7 +19,7 @@ using namespace std;
 class Dog : public Pet
 {
 	private:
-		void art_wagTail();
+		void art_wagTail(); // ascii art functions
 		void art_chewBone();
 		void art_enraged();
 		void art_sit();
